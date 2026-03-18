@@ -44,6 +44,7 @@
       backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(163, 230, 53, 0.15);
       height: 56px;
+      gap: 1rem;
     }
     .nav-logo {
       font-family: 'Fraunces', serif;
@@ -52,37 +53,57 @@
       color: var(--green-lime);
       letter-spacing: -0.02em;
       white-space: nowrap;
+      flex-shrink: 0;
     }
-    .nav-links { display: none; }
 
-    /* 🍩 Homeroom button in nav */
-    .nav-donut-btn {
+    /* Desktop nav links — visible on Chromebook */
+    .nav-links {
+      display: flex;
+      gap: 0.5rem;
+      list-style: none;
+      flex: 1;
+      justify-content: center;
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+    .nav-links a {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      font-size: 0.85rem;
-      font-weight: 700;
+      gap: 0.3rem;
+      color: rgba(240,247,236,0.75);
       text-decoration: none;
-      padding: 0.45rem 1.1rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
       border-radius: 100px;
-      background: rgba(244,114,182,0.12);
-      border: 1.5px solid rgba(244,114,182,0.35);
-      color: #f9a8d4;
+      border: 1px solid transparent;
       transition: all 0.2s;
       white-space: nowrap;
-      letter-spacing: 0.01em;
     }
-    .nav-donut-btn:hover {
+    .nav-links a:hover {
+      color: var(--green-lime);
+      border-color: rgba(163,230,53,0.25);
+      background: rgba(163,230,53,0.06);
+    }
+    .nav-links a .nav-icon { font-size: 0.9rem; }
+
+    /* Homeroom link gets pink treatment */
+    .nav-links a.nav-homeroom-link {
+      color: #f9a8d4;
+      border-color: rgba(244,114,182,0.25);
+      background: rgba(244,114,182,0.07);
+    }
+    .nav-links a.nav-homeroom-link:hover {
       background: #be185d;
       border-color: #be185d;
       color: white;
-      transform: scale(1.05);
-      box-shadow: 0 4px 16px rgba(190,24,93,0.4);
     }
 
-    /* Hamburger — visible on ALL sizes now */
+    /* Hamburger — HIDDEN on desktop, shown on mobile only */
     .nav-hamburger {
-      display: flex;
+      display: none;
       flex-direction: column;
       gap: 5px;
       cursor: pointer;
@@ -90,6 +111,7 @@
       background: none;
       border: none;
       z-index: 200;
+      flex-shrink: 0;
     }
     .nav-hamburger span {
       display: block;
@@ -759,12 +781,18 @@
     }
 
     /* ── SCROLL REVEAL ── */
+    /* Content visible by default — JS enhances with animation if available */
     .reveal {
+      opacity: 1;
+      transform: none;
+    }
+    /* JS adds this class to body to enable animations */
+    .js-ready .reveal {
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
-    .reveal.visible {
+    .js-ready .reveal.visible {
       opacity: 1;
       transform: none;
     }
@@ -804,8 +832,10 @@
       .classes-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
-    /* ── Tablet portrait: 768px ── */
-    @media (max-width: 768px) {
+    /* ── Tablet portrait: 600px — switch to hamburger ── */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
 
       .hero {
         grid-template-columns: 1fr;
@@ -1160,7 +1190,15 @@
   <!-- NAV -->
   <nav>
     <div class="nav-logo">Portsmouth STEM 🌱</div>
-    <a href="homeroom.html" class="nav-donut-btn">🍩 Homeroom</a>
+    <ul class="nav-links">
+      <li><a href="#hydroponics"><span class="nav-icon">🌱</span> STEM</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#mission">Our Mission</a></li>
+      <li><a href="#challenge"><span class="nav-icon">🔵</span> Challenge Academy</a></li>
+      <li><a href="#classes">My Classes</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="homeroom.html" class="nav-homeroom-link"><span class="nav-icon">🍩</span> Homeroom</a></li>
+    </ul>
     <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
@@ -1169,13 +1207,11 @@
   <!-- MOBILE NAV DRAWER -->
   <div class="nav-drawer" id="navDrawer">
     <ul>
-      <li><a href="#programs" onclick="closeDrawer()">Programs</a></li>
-      <li><a href="#hydroponics" onclick="closeDrawer()">How It Works</a></li>
-      <li><a href="#mission" onclick="closeDrawer()">Our Mission</a></li>
-      <li><a href="#challenge" onclick="closeDrawer()">Challenge Academy</a></li>
-      <li><a href="#classes" onclick="closeDrawer()">My Classes</a></li>
-      <li><a href="#contact" onclick="closeDrawer()">Contact</a></li>
-      <li><a href="homeroom.html" style="color:var(--accent);">🍩 Homeroom</a></li>
+      <li><a href="#hydroponics" onclick="closeDrawer()">🌱 STEM Hydroponics</a></li>
+      <li><a href="#challenge" onclick="closeDrawer()">🔵 Challenge Academy</a></li>
+      <li><a href="#classes" onclick="closeDrawer()">📚 My Classes</a></li>
+      <li><a href="#contact" onclick="closeDrawer()">✉️ Contact Mr. G</a></li>
+      <li><a href="homeroom.html" style="color:#f9a8d4;">🍩 Homeroom</a></li>
     </ul>
   </div>
 
@@ -1607,14 +1643,11 @@
       if (!hamburger.contains(e.target) && !navDrawer.contains(e.target)) closeDrawer();
     });
 
-    // ── SCROLL REVEAL with safety fallback ──
+    // ── SCROLL REVEAL ──
+    // Add js-ready to enable animations (content stays visible if JS fails)
+    document.body.classList.add('js-ready');
+
     const reveals = document.querySelectorAll('.reveal');
-
-    // Safety: if JS or observer fails, make everything visible after 1.5s
-    const revealFallback = setTimeout(() => {
-      reveals.forEach(el => el.classList.add('visible'));
-    }, 1500);
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -1622,21 +1655,13 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
-
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
     reveals.forEach(el => observer.observe(el));
 
-    // Cancel fallback once first reveal fires
-    const firstReveal = reveals[0];
-    if (firstReveal) {
-      const cancelFallback = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          clearTimeout(revealFallback);
-          cancelFallback.disconnect();
-        }
-      }, { threshold: 0.05 });
-      cancelFallback.observe(firstReveal);
-    }
+    // Fallback: make everything visible after 800ms in case observer stalls
+    setTimeout(() => {
+      reveals.forEach(el => el.classList.add('visible'));
+    }, 800);
 
     // ── STAGGERED CARD REVEALS ──
     document.querySelectorAll('.hydro-card, .challenge-card, .class-card, .program-card').forEach((card, i) => {
