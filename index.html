@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Portsmouth STEM & Challenge Academy</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%B1%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -53,22 +53,11 @@
       letter-spacing: -0.02em;
       white-space: nowrap;
     }
-    .nav-links { display: flex; gap: 1.4rem; list-style: none; }
-    .nav-links a {
-      color: rgba(240,247,236,0.75);
-      text-decoration: none;
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-      white-space: nowrap;
-    }
-    .nav-links a:hover { color: var(--green-lime); }
+    .nav-links { display: none; }
 
-    /* Hamburger — hidden on desktop/Chromebook */
+    /* Hamburger — visible on ALL sizes now */
     .nav-hamburger {
-      display: none;
+      display: flex;
       flex-direction: column;
       gap: 5px;
       cursor: pointer;
@@ -625,11 +614,80 @@
       background: rgba(163,230,53,0.1);
       border: 1px solid rgba(163,230,53,0.25);
       color: var(--green-lime);
-      font-size: 0.82rem;
-      font-weight: 600;
+      font-size: 0.82rem; font-weight: 600;
       letter-spacing: 0.06em;
       padding: 0.5rem 1.2rem;
       border-radius: 100px;
+    }
+
+    /* ── CLASS GROUPS ── */
+    .class-group {
+      margin-bottom: 2.5rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(163,230,53,0.1);
+      border-radius: 20px;
+      padding: 1.8rem;
+    }
+    .class-group-header {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+    }
+    .stem-header { border-bottom: 1px solid rgba(163,230,53,0.15); }
+    .challenge-header { border-bottom: 1px solid rgba(14,165,233,0.2); }
+    .class-group-icon { font-size: 1.8rem; }
+    .class-group-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.3rem; font-weight: 900;
+      color: var(--text-light);
+      letter-spacing: -0.01em;
+    }
+    .class-group-sub {
+      font-size: 0.78rem;
+      color: rgba(240,247,236,0.45);
+      margin-top: 0.15rem;
+    }
+    .class-day-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(240,247,236,0.4);
+      margin-bottom: 0.8rem;
+      margin-top: 1.2rem;
+    }
+    .class-day-label:first-of-type { margin-top: 0; }
+    .classes-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .classes-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .class-card-empty {
+      background: transparent;
+      border: 1.5px dashed rgba(163,230,53,0.08);
+      border-radius: 16px;
+      cursor: default;
+      pointer-events: none;
+    }
+    .class-card-empty:hover { transform: none; background: transparent; border-color: rgba(163,230,53,0.08); }
+
+    /* Responsive group grids */
+    @media (max-width: 768px) {
+      .classes-grid-3 { grid-template-columns: 1fr 1fr; }
+      .classes-grid-2 { grid-template-columns: 1fr; }
+      .class-card-empty { display: none; }
+      .class-group { padding: 1.2rem; }
+    }
+    @media (max-width: 480px) {
+      .classes-grid-3 { grid-template-columns: 1fr; }
+      .classes-grid-2 { grid-template-columns: 1fr; }
     }
 
     /* Tab content hidden by default — tabs removed but keeping for safety */
@@ -702,9 +760,6 @@
       .classes-grid { grid-template-columns: repeat(4, 1fr); gap: 1rem; }
       .class-card { padding: 1.2rem; }
       .hydro-grid { gap: 1.2rem; }
-      /* Nav: tighten gap so 7 items don't crowd */
-      .nav-links { gap: 1.1rem; }
-      .nav-links a { font-size: 0.76rem; }
       /* Footer: wrap links more gracefully */
       .footer-links { gap: 1.2rem; flex-wrap: wrap; }
     }
@@ -718,14 +773,10 @@
       .hydro-grid { grid-template-columns: 1fr 1fr 1fr; }
       .challenges-grid { grid-template-columns: repeat(2, 1fr); }
       .classes-grid { grid-template-columns: repeat(2, 1fr); }
-      .nav-links { gap: 1rem; }
-      .nav-links a { font-size: 0.73rem; }
     }
 
     /* ── Tablet portrait: 768px ── */
     @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
       .nav-drawer { display: block; }
 
       .hero {
@@ -1208,13 +1259,15 @@
         <div class="hydro-video-player">
           <video
             id="hydroVideo"
-            src="guerdat-stem-hydrosystem.mp4"
             autoplay
             muted
             loop
             playsinline
-            preload="auto"
-          ></video>
+            preload="metadata"
+          >
+            <source src="guerdat-stem-hydrosystem.mp4" type="video/mp4">
+            Your browser does not support video playback.
+          </video>
           <button class="hydro-video-mute-btn" id="muteBtn" title="Toggle sound" onclick="toggleMute()">🔇</button>
           <div class="hydro-video-label">📍 Our Classroom System</div>
         </div>
@@ -1355,69 +1408,94 @@
         <span class="semester-pill">🗓 Spring Semester 2026</span>
       </div>
 
-      <div class="classes-grid">
+      <!-- ── STEM HYDROPONICS ── -->
+      <div class="class-group reveal">
+        <div class="class-group-header stem-header">
+          <span class="class-group-icon">🌱</span>
+          <div>
+            <div class="class-group-title">STEM Hydroponics</div>
+            <div class="class-group-sub">Grades 7 &amp; 8</div>
+          </div>
+        </div>
 
-        <!-- STEM · Days 1/2/3 -->
-        <a href="https://classroom.google.com/c/ODQxNTM2MjE0MDE4?cjc=ankzr6zi" class="class-card reveal" target="_blank">
-          <div class="class-type-badge badge-stem">STEM · Hydroponics</div>
-          <div class="class-name">STEM Hydroponics — Period 1</div>
-          <div class="class-period">Grades 7 &amp; 8 · Days 1 / 2 / 3</div>
-          <div class="class-link-row">🔗 Open Google Classroom <span style="color:var(--green-lime);opacity:1;font-style:normal;font-weight:600;">Join Class →</span></div>
-        </a>
+        <div class="class-day-label">Days 1 / 2 / 3</div>
+        <div class="classes-grid classes-grid-3">
+          <a href="https://classroom.google.com/c/ODQxNTM2MjE0MDE4?cjc=ankzr6zi" class="class-card reveal" target="_blank">
+            <div class="class-type-badge badge-stem">STEM · Hydroponics</div>
+            <div class="class-name">Period 1</div>
+            <div class="class-period">Grades 7 &amp; 8 · Days 1 / 2 / 3</div>
+            <div class="class-link-row">🔗 <span style="color:var(--green-lime);font-weight:600;">Join Class →</span></div>
+          </a>
+          <a href="https://classroom.google.com/c/ODQxNTM2MjE0MDE4?cjc=ankzr6zi" class="class-card reveal" target="_blank">
+            <div class="class-type-badge badge-stem">STEM · Hydroponics</div>
+            <div class="class-name">Period 4</div>
+            <div class="class-period">Grades 7 &amp; 8 · Days 1 / 2 / 3</div>
+            <div class="class-link-row">🔗 <span style="color:var(--green-lime);font-weight:600;">Join Class →</span></div>
+          </a>
+          <a href="https://classroom.google.com/c/ODQxNTM2MjE0MDE4?cjc=ankzr6zi" class="class-card reveal" target="_blank">
+            <div class="class-type-badge badge-stem">STEM · Hydroponics</div>
+            <div class="class-name">Period 6</div>
+            <div class="class-period">Grades 7 &amp; 8 · Days 1 / 2 / 3</div>
+            <div class="class-link-row">🔗 <span style="color:var(--green-lime);font-weight:600;">Join Class →</span></div>
+          </a>
+        </div>
 
-        <a href="https://classroom.google.com/c/ODQxNTM2MjE0MDE4?cjc=ankzr6zi" class="class-card reveal" target="_blank">
-          <div class="class-type-badge badge-stem">STEM · Hydroponics</div>
-          <div class="class-name">STEM Hydroponics — Period 4</div>
-          <div class="class-period">Grades 7 &amp; 8 · Days 1 / 2 / 3</div>
-          <div class="class-link-row">🔗 Open Google Classroom <span style="color:var(--green-lime);opacity:1;font-style:normal;font-weight:600;">Join Class →</span></div>
-        </a>
-
-        <a href="https://classroom.google.com/c/ODQxNTM2MjE0MDE4?cjc=ankzr6zi" class="class-card reveal" target="_blank">
-          <div class="class-type-badge badge-stem">STEM · Hydroponics</div>
-          <div class="class-name">STEM Hydroponics — Period 6</div>
-          <div class="class-period">Grades 7 &amp; 8 · Days 1 / 2 / 3</div>
-          <div class="class-link-row">🔗 Open Google Classroom <span style="color:var(--green-lime);opacity:1;font-style:normal;font-weight:600;">Join Class →</span></div>
-        </a>
-
-        <!-- Challenge · Days 1/2/3 -->
-        <a href="https://classroom.google.com/c/ODQxNTM3NzMzNjEz?cjc=toalmx5b" class="class-card reveal" target="_blank">
-          <div class="class-type-badge badge-challenge">Challenge Academy</div>
-          <div class="class-name">Challenge Academy — Period 3</div>
-          <div class="class-period">Grade 6 · Days 1 / 2 / 3</div>
-          <div class="class-link-row">🔗 Open Google Classroom <span style="color:var(--green-lime);opacity:1;font-style:normal;font-weight:600;">Join Class →</span></div>
-        </a>
-
-        <!-- STEM · Days 4/5/6 -->
-        <a href="https://classroom.google.com/c/ODQxNTM2MjE0MDE4?cjc=ankzr6zi" class="class-card reveal" target="_blank">
-          <div class="class-type-badge badge-stem">STEM · Hydroponics</div>
-          <div class="class-name">STEM Hydroponics — Period 2</div>
-          <div class="class-period">Grades 7 &amp; 8 · Days 4 / 5 / 6</div>
-          <div class="class-link-row">🔗 Open Google Classroom <span style="color:var(--green-lime);opacity:1;font-style:normal;font-weight:600;">Join Class →</span></div>
-        </a>
-
-        <a href="https://classroom.google.com/c/ODQxNTM2MjE0MDE4?cjc=ankzr6zi" class="class-card reveal" target="_blank">
-          <div class="class-type-badge badge-stem">STEM · Hydroponics</div>
-          <div class="class-name">STEM Hydroponics — Period 4</div>
-          <div class="class-period">Grades 7 &amp; 8 · Days 4 / 5 / 6</div>
-          <div class="class-link-row">🔗 Open Google Classroom <span style="color:var(--green-lime);opacity:1;font-style:normal;font-weight:600;">Join Class →</span></div>
-        </a>
-
-        <a href="https://classroom.google.com/c/ODQxNTM2MjE0MDE4?cjc=ankzr6zi" class="class-card reveal" target="_blank">
-          <div class="class-type-badge badge-stem">STEM · Hydroponics</div>
-          <div class="class-name">STEM Hydroponics — Period 6</div>
-          <div class="class-period">Grades 7 &amp; 8 · Days 4 / 5 / 6</div>
-          <div class="class-link-row">🔗 Open Google Classroom <span style="color:var(--green-lime);opacity:1;font-style:normal;font-weight:600;">Join Class →</span></div>
-        </a>
-
-        <!-- Challenge · Days 4/5/6 -->
-        <a href="https://classroom.google.com/c/ODQxNTM4NDYzNjIy?cjc=pq5nuts3" class="class-card reveal" target="_blank">
-          <div class="class-type-badge badge-challenge">Challenge Academy</div>
-          <div class="class-name">Challenge Academy — Period 5</div>
-          <div class="class-period">Grade 6 · Days 4 / 5 / 6</div>
-          <div class="class-link-row">🔗 Open Google Classroom <span style="color:var(--green-lime);opacity:1;font-style:normal;font-weight:600;">Join Class →</span></div>
-        </a>
-
+        <div class="class-day-label">Days 4 / 5 / 6</div>
+        <div class="classes-grid classes-grid-3">
+          <a href="https://classroom.google.com/c/ODQxNTM2MjE0MDE4?cjc=ankzr6zi" class="class-card reveal" target="_blank">
+            <div class="class-type-badge badge-stem">STEM · Hydroponics</div>
+            <div class="class-name">Period 2</div>
+            <div class="class-period">Grades 7 &amp; 8 · Days 4 / 5 / 6</div>
+            <div class="class-link-row">🔗 <span style="color:var(--green-lime);font-weight:600;">Join Class →</span></div>
+          </a>
+          <a href="https://classroom.google.com/c/ODQxNTM2MjE0MDE4?cjc=ankzr6zi" class="class-card reveal" target="_blank">
+            <div class="class-type-badge badge-stem">STEM · Hydroponics</div>
+            <div class="class-name">Period 4</div>
+            <div class="class-period">Grades 7 &amp; 8 · Days 4 / 5 / 6</div>
+            <div class="class-link-row">🔗 <span style="color:var(--green-lime);font-weight:600;">Join Class →</span></div>
+          </a>
+          <a href="https://classroom.google.com/c/ODQxNTM2MjE0MDE4?cjc=ankzr6zi" class="class-card reveal" target="_blank">
+            <div class="class-type-badge badge-stem">STEM · Hydroponics</div>
+            <div class="class-name">Period 6</div>
+            <div class="class-period">Grades 7 &amp; 8 · Days 4 / 5 / 6</div>
+            <div class="class-link-row">🔗 <span style="color:var(--green-lime);font-weight:600;">Join Class →</span></div>
+          </a>
+        </div>
       </div>
+
+      <!-- ── CHALLENGE ACADEMY ── -->
+      <div class="class-group reveal">
+        <div class="class-group-header challenge-header">
+          <span class="class-group-icon">🔵</span>
+          <div>
+            <div class="class-group-title">Challenge Academy</div>
+            <div class="class-group-sub">Grade 6</div>
+          </div>
+        </div>
+
+        <div class="class-day-label">Days 1 / 2 / 3</div>
+        <div class="classes-grid classes-grid-2">
+          <a href="https://classroom.google.com/c/ODQxNTM3NzMzNjEz?cjc=toalmx5b" class="class-card reveal" target="_blank">
+            <div class="class-type-badge badge-challenge">Challenge Academy</div>
+            <div class="class-name">Period 3</div>
+            <div class="class-period">Grade 6 · Days 1 / 2 / 3</div>
+            <div class="class-link-row">🔗 <span style="color:var(--water);font-weight:600;">Join Class →</span></div>
+          </a>
+          <div class="class-card class-card-empty"></div>
+        </div>
+
+        <div class="class-day-label">Days 4 / 5 / 6</div>
+        <div class="classes-grid classes-grid-2">
+          <a href="https://classroom.google.com/c/ODQxNTM4NDYzNjIy?cjc=pq5nuts3" class="class-card reveal" target="_blank">
+            <div class="class-type-badge badge-challenge">Challenge Academy</div>
+            <div class="class-name">Period 5</div>
+            <div class="class-period">Grade 6 · Days 4 / 5 / 6</div>
+            <div class="class-link-row">🔗 <span style="color:var(--water);font-weight:600;">Join Class →</span></div>
+          </a>
+          <div class="class-card class-card-empty"></div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -1464,6 +1542,19 @@
   </footer>
 
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // ── VIDEO AUTOPLAY RETRY ──
+    // Chrome sometimes needs a nudge to autoplay even when muted
+    window.addEventListener('load', () => {
+      const video = document.getElementById('hydroVideo');
+      if (video) {
+        video.muted = true;
+        video.play().catch(() => {
+          // Autoplay blocked — show a play hint overlay
+          video.setAttribute('controls', '');
+        });
+      }
+    });
+
     // ── VIDEO MUTE TOGGLE ──
     function toggleMute() {
       const video = document.getElementById('hydroVideo');
