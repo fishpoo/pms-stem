@@ -541,7 +541,7 @@
         <div class="fact-emoji">🤝</div>
         <div class="fact-title">Need Help?</div>
         <p class="fact-text">Have a question or concern? Reach out through Google Classroom or find your teacher in homeroom every morning.</p>
-        <p class="fact-text" style="margin-top: 0.6rem;"><a href="/cdn-cgi/l/email-protection#b7c3d0c2d2c5d3d6c3f7c4d6c2828599d8c5d0" style="color: var(--pink-deep); font-weight: 600; text-decoration: none;">✉️ <span class="__cf_email__" data-cfemail="acd8cbd9c9dec8cdd8ecdfcdd9999e82c3decb">[email&#160;protected]</span></a></p>
+        <p class="fact-text" style="margin-top: 0.6rem;"><a href="mailto:tguerdat@sau52.org" style="color: var(--pink-deep); font-weight: 600; text-decoration: none;">✉️ tguerdat@sau52.org</a></p>
       </div>
 
       <div class="fact-card">
@@ -566,7 +566,7 @@
     <p class="footer-copy">Portsmouth Middle School · Quest 6 Homeroom with Mr. G · 2025 / 2026 · 🍩</p>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     // ── GENERATE FLOATING SPRINKLES ──
     const container = document.getElementById('sprinklesBg');
     const colors = ['#f472b6','#f59e0b','#22c55e','#3b82f6','#a855f7','#ef4444','#fb923c'];
@@ -594,4 +594,12 @@
     const bigDonut = document.querySelector('.hero-donut-main');
     bigDonut.addEventListener('mouseenter', () => {
       bigDonut.style.animation = 'none';
-      bigDonut.style.transform = 'rotate(-10deg) scale(1.1)
+      bigDonut.style.transform = 'rotate(-10deg) scale(1.1)';
+      bigDonut.style.transition = 'transform 0.15s cubic-bezier(0.34,1.56,0.64,1)';
+    });
+    bigDonut.addEventListener('mouseleave', () => {
+      bigDonut.style.transform = 'rotate(0deg) scale(1)';
+    });
+  </script>
+</body>
+</html>
